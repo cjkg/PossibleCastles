@@ -2,78 +2,100 @@
 using System.Reflection.Metadata.Ecma335;
 using Newtonsoft.Json;
 using PossibleCastles.UI;
-using Mindmagma.Curses;
+using SDL2;
 
 namespace PossibleCastles
 {
     class Program
     {
-        private static IntPtr _screen;
-
-        private static readonly short[] ColorTable =
-        {
-            CursesColor.RED,
-            CursesColor.BLUE,
-            CursesColor.GREEN,
-            CursesColor.CYAN,
-            CursesColor.RED,
-            CursesColor.MAGENTA,
-            CursesColor.YELLOW,
-            CursesColor.WHITE
-        };
-        
         static void Main(string[] args)
         {
-            _screen = NCurses.InitScreen();
+            // var renderer = new UI.CursesUI.CursesRenderer();
+            // renderer.RenderInit();
 
-            UI.CursesUI.CursesRenderer renderer;
-            
+            if (SDL.SDL_Init(SDL.SDL_INIT_VIDEO) < 0)
+            {
+                Console.WriteLine($"There was an issue initializing SDL. {SDL.SDL_GetError()}");
+            }
+
+            var window = SDL.SDL_CreateWindow("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED,
+                SDL.SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
+
+            if (window == IntPtr.Zero)
+            {
+                Console.WriteLine($"There was an issue creating the window. {SDL.SDL_GetError()}");
+            }
+
+            var renderer = SDL.SDL_CreateRenderer(window,
+                -1,
+                SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED |
+                SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+
+            if (renderer == IntPtr.Zero)
+            {
+                Console.WriteLine($"There was an issue creating the renderer. {SDL.SDL_GetError()}");
+            }
+
             bool exit = false;
             bool update = true;
-            const int mapWidth = 80; // TODO: delete
-            const int mapHeight = 50; // TODO: delete
-            int floor = 1; // TODO: delete
-            
-            if(NCurses.HasColors())
-            {
-                NCurses.StartColor();
-                for (short i = 1; i < 8; i++)
-                    NCurses.InitPair(i, ColorTable[i], CursesColor.BLACK);
-            }
 
-            NCurses.NoDelay(_screen, true);
-            NCurses.SetCursor(0);
-            NCurses.NoEcho();
-            
+            // Main Loop
             while (!exit)
             {
-                NCurses.MoveAddString(3, 3,"Click a button or press any key to exit.");
-
-                switch (NCurses.GetChar())
+                // Event and continue to do so until the queue is empty.
+                while (SDL.SDL_PollEvent(out SDL.SDL_Event e) == 1)
                 {
-                    case -1:
-                        // no input
-                        break;
-                    default:
-                        exit = true;
-                        break;
+                    switch (e.type)
+                    {
+                        case SDL.SDL_EventType.SDL_QUIT:
+                            exit = true;
+                            break;
+                    }
                 }
                 
-                /*if (update)
+                // Sets the color that the screen will be cleared with.
+                if (SDL.SDL_SetRenderDrawColor(renderer, 135, 206, 235, 255) < 0)
                 {
-                    NCurses.Move(NCurses.Lines - 1, NCurses.Columns - 1);
-                    NCurses.Refresh();
-                    update = false;
-                }*/
+                    Console.WriteLine($"There was an issue with setting the render draw color. {SDL.SDL_GetError()}");
+                }
                 
-            }
+                // Clears the current render surface.
+                if (SDL.SDL_RenderClear(renderer) < 0)
+                {
+                    Console.WriteLine($"There was an issue with clearing the render surface. {SDL.SDL_GetError()}");
+                }
 
-            NCurses.EndWin();
-        }
-        private static void AddStr(int y, int x, string str)
-        {
-            if (x >= 0 && x < NCurses.Columns && y >= 0 && y < NCurses.Lines)
-                NCurses.MoveAddString(y, x, str);
+                // Switches out the currently presented render surface with the one we just did work on.
+                SDL.SDL_RenderPresent(renderer); 
+            }
+            
+            // Clean up the resources that were created.
+            SDL.SDL_DestroyRenderer(renderer);
+            SDL.SDL_DestroyWindow(window);
+            SDL.SDL_Quit(); 
         }
     }
 }
+/*
+ switch (NCurses.GetChar())
+ {
+     case -1:
+         // no input
+         break;
+     default:
+         exit = true;
+         break;
+ }
+
+ if (update)
+ {
+     NCurses.Move(NCurses.Lines - 1, NCurses.Columns - 1);
+     NCurses.Refresh();
+     update = false;
+ }*/
+
+            /*}
+
+            renderer.CleanUp();
+    }
+}*/
