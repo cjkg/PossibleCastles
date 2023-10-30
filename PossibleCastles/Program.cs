@@ -1,8 +1,4 @@
-﻿using System.Diagnostics.Tracing;
-using System.Reflection.Metadata.Ecma335;
-using Newtonsoft.Json;
-using PossibleCastles.UI;
-using SDL2;
+﻿using SDL2;
 
 namespace PossibleCastles
 {
@@ -10,16 +6,13 @@ namespace PossibleCastles
     {
         static void Main(string[] args)
         {
-            // var renderer = new UI.CursesUI.CursesRenderer();
-            // renderer.RenderInit();
-
             if (SDL.SDL_Init(SDL.SDL_INIT_VIDEO) < 0)
             {
                 Console.WriteLine($"There was an issue initializing SDL. {SDL.SDL_GetError()}");
             }
 
             var window = SDL.SDL_CreateWindow("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED,
-                SDL.SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
+                SDL.SDL_WINDOWPOS_UNDEFINED, 720, 400, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
 
             if (window == IntPtr.Zero)
             {
@@ -36,9 +29,11 @@ namespace PossibleCastles
                 Console.WriteLine($"There was an issue creating the renderer. {SDL.SDL_GetError()}");
             }
 
-            bool exit = false;
-            bool update = true;
+            string imagePath = "Images/hero.png"; 
+            IntPtr image = SDL_image.IMG_Load(imagePath);
+            IntPtr texture = SDL.SDL_CreateTextureFromSurface(renderer, image);
 
+            bool exit = false;
             // Main Loop
             while (!exit)
             {
@@ -54,7 +49,7 @@ namespace PossibleCastles
                 }
                 
                 // Sets the color that the screen will be cleared with.
-                if (SDL.SDL_SetRenderDrawColor(renderer, 135, 206, 235, 255) < 0)
+                if (SDL.SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255) < 0)
                 {
                     Console.WriteLine($"There was an issue with setting the render draw color. {SDL.SDL_GetError()}");
                 }
@@ -64,7 +59,9 @@ namespace PossibleCastles
                 {
                     Console.WriteLine($"There was an issue with clearing the render surface. {SDL.SDL_GetError()}");
                 }
-
+                
+                // This is where drawing happens
+                SDL.SDL_RenderCopy(renderer, texture, IntPtr.Zero, IntPtr.Zero);
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer); 
             }
@@ -76,26 +73,3 @@ namespace PossibleCastles
         }
     }
 }
-/*
- switch (NCurses.GetChar())
- {
-     case -1:
-         // no input
-         break;
-     default:
-         exit = true;
-         break;
- }
-
- if (update)
- {
-     NCurses.Move(NCurses.Lines - 1, NCurses.Columns - 1);
-     NCurses.Refresh();
-     update = false;
- }*/
-
-            /*}
-
-            renderer.CleanUp();
-    }
-}*/

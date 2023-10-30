@@ -1,3 +1,5 @@
+using SDL2;
+
 namespace PossibleCastles.Map;
 
 public class Tile
@@ -7,4 +9,8 @@ public class Tile
     public required int DarkColor { get; set; }
     public required bool Walkable { get; set; }
     public required bool BlocksSight { get; set; }
+
+    public void Render(SDL.SDL_Rect camera)
+    {
+    }
 }
