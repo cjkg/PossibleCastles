@@ -1,3 +1,5 @@
+using SDL2;
+
 namespace PossibleCastles.Entity;
 
 public class Creature
@@ -23,6 +25,33 @@ public class Creature
     public int Fov { get; set; }
     public int Hp { get; set; }
     public int MaxHp { get; set; }
+
+    public bool Move(int dx, int dy)
+    {
+        if (CanMove(X + dx, Y + dy))
+        {
+            X += dx;
+            Y += dy;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool MoveDown()
+    {
+        if (CanMove(X, Y - 1))
+        {
+            Y += 1;
+            return true;
+        }
+
+        return false;
+    }
+    public bool CanMove(int x, int y)
+    {
+        return true; // TODO put in real conditions
+    }
 }
 
 // TODO: Move method
