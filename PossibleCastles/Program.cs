@@ -10,29 +10,22 @@ namespace PossibleCastles
         static void Main(string[] args)
         {
             List<Creature> creatures = new();
-
+            
             SdlWindow window = new("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,
                 1280, 840,
                 SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN); // TODO: get rid of magic numbers, put in a config file?
             SdlRenderer renderer = new(window.Win);
+            
             SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
                 420); // TODO: get rid of magic numbers, put in a config file?
 
-            string imagePath = "Textures/Creatures/hero.png";
-            IntPtr heroImage = SDL_image.IMG_Load(imagePath);
-            IntPtr heroTexture = SDL.SDL_CreateTextureFromSurface(renderer.Renderer, heroImage);
-
-            imagePath = "Textures/Creatures/spider.png";
-            IntPtr spiderImage = SDL_image.IMG_Load(imagePath);
-            IntPtr spiderTexture = SDL.SDL_CreateTextureFromSurface(renderer.Renderer, spiderImage);
-
-            Creature hero = new(20, 8, 16, 24, heroTexture, "Hero", 5, 10, 10);
+            Creature spider = new(5, 5, 16, 24, renderer.TextureFactory("spider"), "spider", 10, 3, 3);
+            creatures.Add(spider);
+            
+            Creature hero = new(20, 8, 16, 24, renderer.TextureFactory("hero"), "hero", 5, 10, 10);
             creatures.Add(hero);
 
-            Creature spider = new(5, 5, 16, 24, spiderTexture, "Spider", 10, 3, 3);
-            creatures.Add(spider);
-
-            Creature spider2 = new(10, 10, 16, 24, spiderTexture, "Spider", 10, 3, 3);
+            Creature spider2 = new(5, 5, 16, 24, renderer.TextureFactory("spider"), "spider", 10, 3, 3);
             creatures.Add(spider2);
 
             bool exit = false;

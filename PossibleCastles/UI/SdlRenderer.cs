@@ -37,6 +37,39 @@ public class SdlRenderer
     }
     
     public IntPtr Renderer { get; set; }
+    private Dictionary<string, IntPtr> textures = new Dictionary<string, IntPtr>();
+
+    public IntPtr TextureFactory(string key)
+    {
+        IntPtr texture;
+
+        if (textures.ContainsKey(key))
+        {
+            texture = textures[key];
+        }
+        else
+        {
+            string textureType;
+            switch (key)
+            {
+                case "spider":
+                    textureType = "Creatures";
+                    break;
+                case "hero":
+                    textureType = "Creatures";
+                    break;
+                default:
+                    textureType = "Creatures";
+                    break;
+            }
+
+            string filePath = "Textures/" + textureType + "/" + key + ".png";
+            IntPtr image = SDL_image.IMG_Load(filePath);
+            texture = SDL.SDL_CreateTextureFromSurface(Renderer, image);
+            textures.Add(key, texture);
+        }
+        return texture;
+    }
     
     public void Cleanup()
     {
