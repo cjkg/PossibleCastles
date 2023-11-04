@@ -1,6 +1,6 @@
 using SDL2;
 
-namespace PossibleCastles.UI.SDL2UI;
+namespace PossibleCastles.UI;
 
 public class SdlWindow
 {

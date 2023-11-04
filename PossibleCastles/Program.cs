@@ -1,7 +1,7 @@
-﻿using SDL2;
-using PossibleCastles.UI.SDL2UI;
+﻿using PossibleCastles.Command;
+using SDL2;
 using PossibleCastles.Entity;
-using PossibleCastles.UI.Input.Command;
+using PossibleCastles.UI;
 
 namespace PossibleCastles
 {
@@ -36,7 +36,9 @@ namespace PossibleCastles
             creatures.Add(spider2);
 
             bool exit = false;
+            
             Invoker playerHandler = new(hero);
+            
             // Main Loop
             while (!exit)
             {
@@ -82,7 +84,6 @@ namespace PossibleCastles
 
                 // This is where drawing happens
                 renderer.RenderCreatures(creatures);
-
 
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer.Renderer);

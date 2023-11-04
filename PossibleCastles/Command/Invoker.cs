@@ -1,11 +1,11 @@
 using PossibleCastles.Entity;
 
-namespace PossibleCastles.UI.Input.Command;
+namespace PossibleCastles.Command;
 
 public class Invoker
 {
     private Creature _creature;
-    private ICommand _press;
+    private ICommand? _press;
 
     public Invoker(Creature creature)
     {

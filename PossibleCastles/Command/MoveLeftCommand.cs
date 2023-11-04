@@ -1,5 +1,6 @@
 using PossibleCastles.Entity;
-namespace PossibleCastles.UI.Input.Command;
+
+namespace PossibleCastles.Command;
 
 public class MoveLeftCommand : ICommand
 {
