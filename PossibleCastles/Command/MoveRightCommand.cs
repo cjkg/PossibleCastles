@@ -1,11 +1,11 @@
-using PossibleCastles.Entity;
+using PossibleCastles.Entities;
 
 namespace PossibleCastles.Command;
 
 public class MoveRightCommand : ICommand
 {
-    public void Execute(Creature creature)
+    public void Execute(Entity entity)
     {
-        creature.Move(1, 0);
+        entity.Move(1, 0);
     } 
 }

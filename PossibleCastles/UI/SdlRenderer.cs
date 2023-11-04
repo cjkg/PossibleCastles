@@ -1,4 +1,4 @@
-using PossibleCastles.Entity;
+using PossibleCastles.Entities;
 using SDL2;
 
 namespace PossibleCastles.UI;
@@ -14,9 +14,9 @@ public class SdlRenderer
  
     }
 
-    public void RenderCreatures(List<Creature> creatures)
+    public void RenderCreatures(List<Entity> creatures)
     {
-        foreach (Creature creature in creatures)
+        foreach (Entity creature in creatures)
         {
             SDL.SDL_Rect creatureSrcrect;
             SDL.SDL_Rect creatureDstrect;

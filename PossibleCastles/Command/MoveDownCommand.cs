@@ -1,11 +1,11 @@
-using PossibleCastles.Entity;
+using PossibleCastles.Entities;
 
 namespace PossibleCastles.Command;
 
 public class MoveDownCommand : ICommand
 {
-    public virtual void Execute(Creature creature)
+    public virtual void Execute(Entity entity)
     {
-        creature.Move(0, 1);
+        entity.Move(0, 1);
     }
 }

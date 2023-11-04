@@ -1,8 +1,8 @@
-using PossibleCastles.Entity;
+using PossibleCastles.Entities;
 
 namespace PossibleCastles.Command;
 
 public interface ICommand
 {
-    virtual void Execute(Creature creature) {}
+    virtual void Execute(Entity entity) {}
 }

@@ -1,6 +1,6 @@
 ﻿using PossibleCastles.Command;
+using PossibleCastles.Entities;
 using SDL2;
-using PossibleCastles.Entity;
 using PossibleCastles.UI;
 
 namespace PossibleCastles
@@ -9,7 +9,7 @@ namespace PossibleCastles
     {
         static void Main(string[] args)
         {
-            List<Creature> creatures = new();
+            List<Entity> entities = new();
             
             SdlWindow window = new("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,
                 1280, 840,
@@ -19,56 +19,24 @@ namespace PossibleCastles
             SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
                 420); // TODO: get rid of magic numbers, put in a config file?
 
-            Creature spider = new(5, 5, 16, 24, renderer.TextureFactory("spider"), "spider", 10, 3, 3);
-            creatures.Add(spider);
+            Entity spider = new(5, 5, 16, 24, renderer.TextureFactory("spider"), "spider");
+            entities.Add(spider);
             
-            Creature hero = new(20, 8, 16, 24, renderer.TextureFactory("hero"), "hero", 5, 10, 10);
-            creatures.Add(hero);
+            Entity player = new(20, 8, 16, 24, renderer.TextureFactory("hero"), "hero");
+            entities.Add(player);
 
-            Creature spider2 = new(5, 5, 16, 24, renderer.TextureFactory("spider"), "spider", 10, 3, 3);
-            creatures.Add(spider2);
+            Entity spider2 = new(10, 5, 16, 24, renderer.TextureFactory("spider"), "spider");
+            entities.Add(spider2);
 
             bool exit = false;
             
-            Invoker playerHandler = new(hero);
-            
+            Invoker playerHandler = new(player);
+            Engine engine = new(entities, playerHandler, player);
             // Main Loop
             while (!exit)
             {
-                // Event and continue to do so until the queue is empty.
-                while (SDL.SDL_PollEvent(out SDL.SDL_Event e) == 1)
-                {
-                    switch (e.type)
-                    {
-                        case SDL.SDL_EventType.SDL_QUIT:
-                            exit = true;
-                            break;
-                        case SDL.SDL_EventType.SDL_KEYDOWN:
-
-                            switch (e.key.keysym.sym)
-                            {
-                                case SDL.SDL_Keycode.SDLK_w:
-                                    playerHandler.Press(new MoveUpCommand()); // TODO: Make movements into a flywheel instead of a command
-                                    break;
-                                case SDL.SDL_Keycode.SDLK_a:
-                                    playerHandler.Press(new MoveLeftCommand()); // TODO: Make movements into a flywheel instead of a command
-                                    break;
-                                case SDL.SDL_Keycode.SDLK_s:
-                                    playerHandler.Press(new MoveDownCommand()); // TODO: Make movements into a flywheel instead of a command
-                                    break;
-                                case SDL.SDL_Keycode.SDLK_d:
-                                    playerHandler.Press(new MoveRightCommand()); // TODO: Make movements into a flywheel instead of a command
-                                    break;
-                                default:
-                                    playerHandler.Press(new NullCommand());
-                                    break;
-                            }
-
-                            playerHandler.Command();
-                            break;
-                    }
-                }
-
+                exit = engine.HandleEvents();
+                
                 // Sets the color that the screen will be cleared with.
                 SDL.SDL_SetRenderDrawColor(renderer.Renderer, 0, 0, 0, 255);
 
@@ -76,7 +44,7 @@ namespace PossibleCastles
                 SDL.SDL_RenderClear(renderer.Renderer);
 
                 // This is where drawing happens
-                renderer.RenderCreatures(creatures);
+                renderer.RenderCreatures(entities);
 
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer.Renderer);
