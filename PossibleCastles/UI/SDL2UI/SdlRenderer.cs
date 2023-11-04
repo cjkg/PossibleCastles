@@ -16,7 +16,24 @@ public class SdlRenderer
 
     public void RenderCreatures(List<Creature> creatures)
     {
-       // TODO: need to get this out of main into here. 
+        foreach (Creature creature in creatures)
+        {
+            SDL.SDL_Rect creatureSrcrect;
+            SDL.SDL_Rect creatureDstrect;
+
+            creatureSrcrect.x = 0;
+            creatureSrcrect.y = 0;
+            creatureSrcrect.w = creature.W;
+            creatureSrcrect.h = creature.H;
+
+            creatureDstrect.x = creature.X * 16; // TODO: remove magic number, put in config file?
+            creatureDstrect.y = creature.Y * 24; // TODO: remove magic number, put in config file?
+            creatureDstrect.w = creature.W;
+            creatureDstrect.h = creature.H;
+
+            SDL.SDL_RenderCopy(Renderer, creature.Texture, ref creatureSrcrect, ref creatureDstrect);
+        }
+        // TODO: need to get this out of main into here. 
     }
     
     public IntPtr Renderer { get; set; }

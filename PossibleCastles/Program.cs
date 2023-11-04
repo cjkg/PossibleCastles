@@ -83,23 +83,6 @@ namespace PossibleCastles
                 // This is where drawing happens
                 renderer.RenderCreatures(creatures);
 
-                foreach (Creature creature in creatures)
-                {
-                    SDL.SDL_Rect creatureSrcrect;
-                    SDL.SDL_Rect creatureDstrect;
-
-                    creatureSrcrect.x = 0;
-                    creatureSrcrect.y = 0;
-                    creatureSrcrect.w = creature.W;
-                    creatureSrcrect.h = creature.H;
-
-                    creatureDstrect.x = creature.X * 16; // TODO: remove magic number, put in config file?
-                    creatureDstrect.y = creature.Y * 24; // TODO: remove magic number, put in config file?
-                    creatureDstrect.w = creature.W;
-                    creatureDstrect.h = creature.H;
-
-                    SDL.SDL_RenderCopy(renderer.Renderer, creature.Texture, ref creatureSrcrect, ref creatureDstrect);
-                }
 
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer.Renderer);
