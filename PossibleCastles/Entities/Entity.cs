@@ -2,13 +2,15 @@ namespace PossibleCastles.Entities;
 
 public class Entity
 {
-    public Entity(int x, int y, int w, int h, IntPtr texture, string name)
+    public Entity(int x, int y, int w, int h, IntPtr texture, bool walkable, bool blocksSight, string name)
     {
         X = x;
         Y = y;
         W = w;
         H = h;
         Texture = texture;
+        Walkable = walkable;
+        BlocksSight = blocksSight;
         Name = name;
     }
     public int X { get; set; }
@@ -17,6 +19,8 @@ public class Entity
     public int H { get; set; }
     public IntPtr Texture { get; set; }
     public string Name { get; set; }
+    public bool Walkable { get; set; }
+    public bool BlocksSight { get; set; } 
 
     public bool Move(int dx, int dy)
     {

@@ -14,30 +14,30 @@ public class SdlRenderer
  
     }
 
-    public void RenderCreatures(List<Entity> creatures)
+    public void RenderEntities(List<Entity> entities)
     {
-        foreach (Entity creature in creatures)
+        foreach (Entity entity in entities)
         {
             SDL.SDL_Rect creatureSrcrect;
             SDL.SDL_Rect creatureDstrect;
 
             creatureSrcrect.x = 0;
             creatureSrcrect.y = 0;
-            creatureSrcrect.w = creature.W;
-            creatureSrcrect.h = creature.H;
+            creatureSrcrect.w = entity.W;
+            creatureSrcrect.h = entity.H;
 
-            creatureDstrect.x = creature.X * 16; // TODO: remove magic number, put in config file?
-            creatureDstrect.y = creature.Y * 24; // TODO: remove magic number, put in config file?
-            creatureDstrect.w = creature.W;
-            creatureDstrect.h = creature.H;
+            creatureDstrect.x = entity.X * 16; // TODO: remove magic number, put in config file?
+            creatureDstrect.y = entity.Y * 24; // TODO: remove magic number, put in config file?
+            creatureDstrect.w = entity.W;
+            creatureDstrect.h = entity.H;
 
-            SDL.SDL_RenderCopy(Renderer, creature.Texture, ref creatureSrcrect, ref creatureDstrect);
+            SDL.SDL_RenderCopy(Renderer, entity.Texture, ref creatureSrcrect, ref creatureDstrect);
         }
         // TODO: need to get this out of main into here. 
     }
     
     public IntPtr Renderer { get; set; }
-    private Dictionary<string, IntPtr> textures = new Dictionary<string, IntPtr>();
+    private Dictionary<string, IntPtr> textures = new();
 
     public IntPtr TextureFactory(string key)
     {

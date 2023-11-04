@@ -1,5 +1,6 @@
 using PossibleCastles.Command;
 using PossibleCastles.Entities;
+using PossibleCastles.UI;
 using SDL2;
 
 namespace PossibleCastles;
@@ -52,7 +53,11 @@ public class Engine
                     break;
             }
         }
-
         return false;
+    }
+
+    public void Render(SdlRenderer renderer)
+    {
+       //TODO: Get this out of main and into here 
     }
 }
