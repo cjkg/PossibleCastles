@@ -55,6 +55,15 @@ namespace PossibleCastles
                                 case SDL.SDL_Keycode.SDLK_w:
                                     playerHandler.Press(new MoveUpCommand()); // TODO: Make movements into a flywheel instead of a command
                                     break;
+                                case SDL.SDL_Keycode.SDLK_a:
+                                    playerHandler.Press(new MoveLeftCommand()); // TODO: Make movements into a flywheel instead of a command
+                                    break;
+                                case SDL.SDL_Keycode.SDLK_s:
+                                    playerHandler.Press(new MoveDownCommand()); // TODO: Make movements into a flywheel instead of a command
+                                    break;
+                                case SDL.SDL_Keycode.SDLK_d:
+                                    playerHandler.Press(new MoveRightCommand()); // TODO: Make movements into a flywheel instead of a command
+                                    break;
                                 default:
                                     playerHandler.Press(new NullCommand());
                                     break;
