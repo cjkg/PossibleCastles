@@ -1,3 +1,4 @@
+using PossibleCastles.Components;
 using PossibleCastles.Entities;
 using SDL2;
 
@@ -14,6 +15,7 @@ public class SdlRenderer
  
     }
 
+    /*
     public void RenderEntities(List<Entity> entities)
     {
         foreach (Entity entity in entities)
@@ -21,20 +23,22 @@ public class SdlRenderer
             SDL.SDL_Rect creatureSrcrect;
             SDL.SDL_Rect creatureDstrect;
 
+            Dimension dimension = entity.GetComponent<Dimension>();
             creatureSrcrect.x = 0;
             creatureSrcrect.y = 0;
-            creatureSrcrect.w = entity.W;
-            creatureSrcrect.h = entity.H;
+            creatureSrcrect.w = dimension.W;
+            creatureSrcrect.h = dimension.H;
 
             creatureDstrect.x = entity.X * 16; // TODO: remove magic number, put in config file?
             creatureDstrect.y = entity.Y * 24; // TODO: remove magic number, put in config file?
-            creatureDstrect.w = entity.W;
-            creatureDstrect.h = entity.H;
+            creatureDstrect.w = dimension.W;
+            creatureDstrect.h = dimension.H;
 
-            SDL.SDL_RenderCopy(Renderer, entity.Texture, ref creatureSrcrect, ref creatureDstrect);
+            SDL.SDL_RenderCopy(Renderer, EntityTexture, ref creatureSrcrect, ref creatureDstrect);
         }
         // TODO: need to get this out of main into here. 
     }
+    */
     
     public IntPtr Renderer { get; set; }
     private Dictionary<string, IntPtr> textures = new();

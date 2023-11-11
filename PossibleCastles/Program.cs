@@ -18,7 +18,7 @@ namespace PossibleCastles
             SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
                 480); // TODO: get rid of magic numbers, put in a config file?
 
-            Entity player = new("hero", 0, 5, 16, 24, renderer.TextureFactory("hero"), new List<Component>());
+            Hero player = new(10, 10);
             entities.Add(player);/*
             Entity spider = new("spider", 0, 5, 16, 24, renderer.TextureFactory("spider"));
             entities.Add(spider);
@@ -32,7 +32,6 @@ namespace PossibleCastles
             // Main Loop
             while (true)
             {
-                player.UpdateComponents();
                 // Sets the color that the screen will be cleared with.
                 SDL.SDL_SetRenderDrawColor(renderer.Renderer, 0, 0, 0, 255);
 
@@ -40,8 +39,7 @@ namespace PossibleCastles
                 SDL.SDL_RenderClear(renderer.Renderer);
 
                 // This is where drawing happens
-                renderer.RenderEntities(entities);
-
+                
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer.Renderer);
             }

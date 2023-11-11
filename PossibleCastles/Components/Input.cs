@@ -4,8 +4,12 @@ using SDL2;
 
 namespace PossibleCastles.Components;
 
-public class InputComponent : Component
+public class Input : Component
 {
+    public void Update()
+    {
+    }
+    /*
     public void Update(Invoker entityInvoker)
     {
         while (SDL.SDL_PollEvent(out SDL.SDL_Event e) == 1)
@@ -34,5 +38,5 @@ public class InputComponent : Component
                 break; //TODO: Is this right?
             }
         }
-    }
+    }*/
 }
