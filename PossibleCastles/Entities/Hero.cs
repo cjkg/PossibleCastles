@@ -13,5 +13,8 @@ public class Hero : Entity
         
         RenderComponent render = new(location, dimension);
         AddComponent(render);
+
+        InputComponent input = new(location);
+        AddComponent(input);
     }
 }

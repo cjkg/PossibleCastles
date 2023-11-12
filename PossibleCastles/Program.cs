@@ -10,7 +10,6 @@ namespace PossibleCastles
     {
         static void Main(string[] args)
         {
-            List<Entity> entities = new();
             SdlWindow window = new("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,
                 1280, 960,
                 SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN); // TODO: get rid of magic numbers, put in a config file?
@@ -20,16 +19,12 @@ namespace PossibleCastles
                 480); // TODO: get rid of magic numbers, put in a config file?
 
             Hero player = new(10, 10);
-            player.Name = "hero";
-            entities.Add(player);/*
-            Entity spider = new("spider", 0, 5, 16, 24, renderer.TextureFactory("spider"));
-            entities.Add(spider);
-            Entity spider2 = new("spider", 0, 10, 16, 24, renderer.TextureFactory("spider"));
-            entities.Add(spider2);*/
+            player.Name = "hero"; //TODO get this in constructor
 
             bool exit = false;
+            InputSystem inputSystem = new();
             RenderSystem renderSystem = new(window, renderer.Renderer);
-            
+             
             // Main Loop
             while (true)
             {
@@ -40,6 +35,7 @@ namespace PossibleCastles
                 SDL.SDL_RenderClear(renderer.Renderer);
 
                 // This is where drawing happens
+                inputSystem.Update();
                 renderSystem.Update();
                  
                 // Switches out the currently presented render surface with the one we just did work on.

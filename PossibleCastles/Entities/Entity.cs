@@ -12,6 +12,7 @@ public class Entity
       Components.Add(component);
       component.Entity = this;
    }
+   
    public T GetComponent<T>() where T : Component
    {
       foreach (Component component in Components)
