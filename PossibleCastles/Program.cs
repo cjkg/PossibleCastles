@@ -19,7 +19,8 @@ namespace PossibleCastles
             SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
                 480); // TODO: get rid of magic numbers, put in a config file?
 
-            Hero player = new(10, 10, renderer.TextureFactory("hero"));
+            Hero player = new(10, 10);
+            player.Name = "hero";
             entities.Add(player);/*
             Entity spider = new("spider", 0, 5, 16, 24, renderer.TextureFactory("spider"));
             entities.Add(spider);

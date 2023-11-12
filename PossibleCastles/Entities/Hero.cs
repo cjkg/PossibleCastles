@@ -3,9 +3,8 @@ namespace PossibleCastles.Entities;
 
 public class Hero : Entity
 {
-    public Hero(int x, int y, IntPtr texture)
+    public Hero(int x, int y)
     {
-        Texture = texture;
         LocationComponent location = new(x, y);
         AddComponent(location);
 
@@ -15,6 +14,4 @@ public class Hero : Entity
         RenderComponent render = new(location, dimension);
         AddComponent(render);
     }
-    
-    public IntPtr Texture { get; set; }
 }

@@ -15,7 +15,7 @@ public class RenderComponent: Component
     public LocationComponent Location { get; set; }
     public DimensionComponent Dimension { get; set; }
     
-    public void Update()
+    public void Update(IntPtr renderer, IntPtr texture)
     {
         //Put this sucker in a draw function, where the renderer can be easily passed to it.
         SDL.SDL_Rect RenderableSrcRect = new();
@@ -31,6 +31,7 @@ public class RenderComponent: Component
         RenderableDstRect.w = Dimension.W;
         RenderableDstRect.h = Dimension.H;
         
+        SDL.SDL_RenderCopy(renderer, texture, ref RenderableSrcRect, ref RenderableDstRect);
         
     }
 }

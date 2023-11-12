@@ -1,4 +1,6 @@
+using System.Net.Mime;
 using PossibleCastles.Components;
+using PossibleCastles.Entities;
 using PossibleCastles.UI;
 using SDL2;
 
@@ -56,9 +58,9 @@ public class RenderSystem
 
     public void Update()
     {
-        foreach (RenderComponent component in Components)
+        foreach (RenderComponent c in Components)
         {
-            component.Update();
+            c.Update(Renderer, TextureFactory(c.Entity.Name));
         }
     }
 
