@@ -12,9 +12,8 @@ public class SdlRenderer
             -1,
             SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED |
             SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC); // TODO: Abstract away flags
- 
     }
-
+    
     /*
     public void RenderEntities(List<Entity> entities)
     {
@@ -41,7 +40,7 @@ public class SdlRenderer
     */
     
     public IntPtr Renderer { get; set; }
-    private Dictionary<string, IntPtr> textures = new();
+    private static Dictionary<string, IntPtr> textures = new();
 
     public IntPtr TextureFactory(string key)
     {
