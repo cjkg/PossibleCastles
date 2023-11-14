@@ -1,5 +1,4 @@
-﻿using PossibleCastles.Components;
-using PossibleCastles.Entities;
+﻿using PossibleCastles.Entities;
 using PossibleCastles.Systems;
 using SDL2;
 using PossibleCastles.UI;
@@ -28,6 +27,8 @@ namespace PossibleCastles
             // Main Loop
             while (true)
             {
+                inputSystem.Update();
+                 
                 // Sets the color that the screen will be cleared with.
                 SDL.SDL_SetRenderDrawColor(renderer.Renderer, 0, 0, 0, 255);
 
@@ -35,13 +36,12 @@ namespace PossibleCastles
                 SDL.SDL_RenderClear(renderer.Renderer);
 
                 // This is where drawing happens
-                inputSystem.Update();
                 renderSystem.Update();
                  
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer.Renderer);
             }
-            renderer.Cleanup();
+            renderSystem.Cleanup();
             window.Cleanup();
         }
     }

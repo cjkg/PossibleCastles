@@ -12,16 +12,9 @@ public class Entity
       Components.Add(component);
       component.Entity = this;
    }
-   
-   public T GetComponent<T>() where T : Component
+
+   public void RemoveComponent(Component component)
    {
-      foreach (Component component in Components)
-      {
-         if (component.GetType().Equals(typeof(T)))
-         {
-            return (T)component;
-         }
-      }
-      return null;
+      Components.Remove(component);
    }
 }
