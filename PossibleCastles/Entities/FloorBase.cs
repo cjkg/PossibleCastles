@@ -2,10 +2,10 @@ using PossibleCastles.Components;
 
 namespace PossibleCastles.Entities;
 
-public class WallBase : Entity
+public class FloorBase : Entity
 {
-    public WallBase(int x, int y)
-    {
+   public FloorBase(int x, int y)
+   {
         LocationComponent location = new(x, y);
         AddComponent(location);
 
@@ -15,7 +15,7 @@ public class WallBase : Entity
         RenderComponent render = new(location, dimension);
         AddComponent(render);
 
-        PhysicsComponent physics = new(10, true);
+        PhysicsComponent physics = new(10, false);
         AddComponent(physics);
-    }
+   } 
 }
