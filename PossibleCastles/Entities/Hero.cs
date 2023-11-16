@@ -3,7 +3,7 @@ namespace PossibleCastles.Entities;
 
 public class Hero : Entity
 {
-    public Hero(int x, int y)
+    public Hero(int x, int y, string name) : base(x, y, name)
     {
         LocationComponent location = new(x, y);
         AddComponent(location);

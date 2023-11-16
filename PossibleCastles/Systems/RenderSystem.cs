@@ -1,6 +1,4 @@
-using System.Net.Mime;
 using PossibleCastles.Components;
-using PossibleCastles.Entities;
 using PossibleCastles.UI;
 using SDL2;
 
@@ -36,11 +34,13 @@ public class RenderSystem
             string textureType;
             switch (key)
             {
+                case "hero":
                 case "spider":
                     textureType = "Creatures";
                     break;
-                case "hero":
-                    textureType = "Creatures";
+                case "floor_base":
+                case "wall_stone":
+                    textureType = "Tiles";
                     break;
                 default:
                     textureType = "Creatures";

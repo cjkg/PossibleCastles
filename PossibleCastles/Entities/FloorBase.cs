@@ -4,8 +4,8 @@ namespace PossibleCastles.Entities;
 
 public class FloorBase : Entity
 {
-   public FloorBase(int x, int y)
-   {
+    public FloorBase(int x, int y, string name) : base(x, y, name)
+    {
         LocationComponent location = new(x, y);
         AddComponent(location);
 
@@ -17,5 +17,5 @@ public class FloorBase : Entity
 
         PhysicsComponent physics = new(10, false);
         AddComponent(physics);
-   } 
+    } 
 }

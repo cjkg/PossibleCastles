@@ -17,10 +17,15 @@ namespace PossibleCastles
             SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
                 480); // TODO: get rid of magic numbers, put in a config file?
 
-            Hero player = new(10, 10);
-            player.Name = "hero"; //TODO get this in constructor
-
+            Hero player = new(10, 10, "hero");
+            
+            WallBase wall = new(5, 5, "wall_stone");
+            WallBase wall2 = new(5, 6, "wall_stone");
+            
+            FloorBase floor = new(7, 7, "floor_base");
+            
             bool exit = false;
+            
             InputSystem inputSystem = new();
             RenderSystem renderSystem = new(window, renderer.Renderer);
              

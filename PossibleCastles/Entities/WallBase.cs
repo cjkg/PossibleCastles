@@ -4,7 +4,7 @@ namespace PossibleCastles.Entities;
 
 public class WallBase : Entity
 {
-    public WallBase(int x, int y)
+    public WallBase(int x, int y, string name) : base(x, y, name)
     {
         LocationComponent location = new(x, y);
         AddComponent(location);
