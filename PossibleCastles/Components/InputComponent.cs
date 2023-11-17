@@ -1,4 +1,4 @@
-using PossibleCastles.Command;
+using PossibleCastles.Events;
 using PossibleCastles.Systems;
 using SDL2;
 
@@ -8,12 +8,15 @@ public class InputComponent : Component
 {
     public InputComponent(LocationComponent locationComponent)
     {
-        Invoker entityInvoker = new(locationComponent);
-        EntityInvoker = entityInvoker;
+        LocationComp = locationComponent;
         InputSystem.Register(this);
+        TryMovePublisher tryMovePub = new();
+        TryMovePub = tryMovePub; // TODO: how to do this more idiomatically?
     }
-    public Invoker EntityInvoker { get; set; }
 
+    public LocationComponent LocationComp { get; private set; }
+
+    public TryMovePublisher TryMovePub { get; set; }
     public void Update()
     {
         while (SDL.SDL_PollEvent(out SDL.SDL_Event e) == 1)
@@ -23,23 +26,18 @@ public class InputComponent : Component
                 switch (e.key.keysym.sym) //TODO: make these swappable
                 {
                     case SDL.SDL_Keycode.SDLK_w:
-                        EntityInvoker.Press(new MoveUpCommand());
+                        TryMovePub.FireEvent(LocationComp, 0, -1); 
                         break;
                     case SDL.SDL_Keycode.SDLK_a:
-                        EntityInvoker.Press(new MoveLeftCommand());
+                        TryMovePub.FireEvent(LocationComp, -1, 0);
                         break;
                     case SDL.SDL_Keycode.SDLK_s:
-                        EntityInvoker.Press(new MoveDownCommand());
+                        TryMovePub.FireEvent(LocationComp, 0, 1);
                         break;
                     case SDL.SDL_Keycode.SDLK_d:
-                        EntityInvoker.Press(new MoveRightCommand());
-                        break;
-                    default:
-                        EntityInvoker.Press(new NullCommand());
+                        TryMovePub.FireEvent(LocationComp, 1, 0);
                         break;
                 }
-
-                EntityInvoker.Command();
                 break; //TODO: Is this right?
             }
         }

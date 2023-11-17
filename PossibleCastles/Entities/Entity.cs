@@ -26,4 +26,16 @@ public class Entity
    {
       Components.Remove(component);
    }
+   
+   public T GetComponent<T>() where T : Component
+   {
+      foreach (Component component in Components)
+      {
+         if (component.GetType().Equals(typeof(T)))
+         {
+            return (T)component;
+         }
+      }
+      return null;
+   }
 }

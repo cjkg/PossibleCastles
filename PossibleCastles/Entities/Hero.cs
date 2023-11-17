@@ -16,5 +16,8 @@ public class Hero : Entity
 
         InputComponent input = new(location);
         AddComponent(input);
+
+        MobileComponent mobile = new(input);
+        AddComponent(mobile);
     }
 }

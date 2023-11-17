@@ -15,7 +15,7 @@ public class FloorBase : Entity
         RenderComponent render = new(location, dimension);
         AddComponent(render);
 
-        PhysicsComponent physics = new(10, false);
-        AddComponent(physics);
+        WalkableComponent walkable = new(true);
+        AddComponent(walkable);
     } 
 }
