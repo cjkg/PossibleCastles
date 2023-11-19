@@ -8,7 +8,7 @@ public class Hero : Entity
         LocationComponent location = new(x, y);
         AddComponent(location);
 
-        DimensionComponent dimension = new(16, 24);
+        DimensionComponent dimension = new(1, 1);
         AddComponent(dimension);
         
         RenderComponent render = new(location, dimension);
@@ -19,5 +19,9 @@ public class Hero : Entity
 
         MobileComponent mobile = new(input);
         AddComponent(mobile);
+        
+        CreatureComponent creature = new();
+        AddComponent(creature);
+
     }
 }

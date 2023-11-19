@@ -23,15 +23,14 @@ public class RenderComponent: Component
         
         RenderableSrcRect.x = 0;
         RenderableSrcRect.y = 0;
-        RenderableSrcRect.w = Dimension.W;
-        RenderableSrcRect.h = Dimension.H;
+        RenderableSrcRect.w = Dimension.W * 16;
+        RenderableSrcRect.h = Dimension.H * 24;
 
         RenderableDstRect.x = Location.X * 16; // TODO: remove magic number, put in config file?
         RenderableDstRect.y = Location.Y * 24; // TODO: remove magic number, put in config file?
-        RenderableDstRect.w = Dimension.W;
-        RenderableDstRect.h = Dimension.H;
+        RenderableDstRect.w = Dimension.W * 16;
+        RenderableDstRect.h = Dimension.H * 24;
         
         SDL.SDL_RenderCopy(renderer, texture, ref RenderableSrcRect, ref RenderableDstRect);
-        
     }
 }

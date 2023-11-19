@@ -9,10 +9,10 @@ public class TryMovePublisher
 
     public void FireEvent(LocationComponent component, int dx, int dy)
     {
-        OnTryMoveUp(new TryMoveEventArgs(component, dx, dy));
+        OnTryMove(new TryMoveEventArgs(component, dx, dy));
     }
 
-    protected virtual void OnTryMoveUp(TryMoveEventArgs e)
+    protected virtual void OnTryMove(TryMoveEventArgs e)
     {
         EventHandler<TryMoveEventArgs> raiseEvent = TryMoveUp;
 

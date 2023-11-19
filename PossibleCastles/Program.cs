@@ -19,16 +19,12 @@ namespace PossibleCastles
 
             Hero player = new(10, 10, "hero");
             
-            WallBase wall = new(5, 5, "wall_stone");
-            WallBase wall2 = new(5, 6, "wall_stone");
-            
-            FloorBase floor = new(7, 7, "floor_base");
-            
             bool exit = false;
             
             InputSystem inputSystem = new();
             RenderSystem renderSystem = new(window, renderer.Renderer);
-             
+            GameMap map = new(80, 50, 1);
+            map.GenerateRandomTiles();
             // Main Loop
             while (true)
             {

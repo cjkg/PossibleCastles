@@ -11,6 +11,7 @@ public class MobileComponent : Component
 
     void HandleTryMove(object sender, TryMoveEventArgs e)
     {
+        // TODO if not walkable, do nothing
         e.LocationComp.X += e.Dx;
         e.LocationComp.Y += e.Dy;
     } 

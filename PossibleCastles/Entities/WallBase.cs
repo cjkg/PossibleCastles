@@ -9,13 +9,16 @@ public class WallBase : Entity
         LocationComponent location = new(x, y);
         AddComponent(location);
 
-        DimensionComponent dimension = new(16, 24);
+        DimensionComponent dimension = new(1, 1);
         AddComponent(dimension);
 
         RenderComponent render = new(location, dimension);
         AddComponent(render);
 
-        PhysicsComponent physics = new(10, true);
-        AddComponent(physics);
+        WalkableComponent walkable = new(false);
+        AddComponent(walkable);
+
+        MapTileComponent mapTile = new();
+        AddComponent(mapTile);
     }
 }

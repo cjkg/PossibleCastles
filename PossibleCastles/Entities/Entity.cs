@@ -12,6 +12,8 @@ public class Entity
    
    public int X { get; set; }
    public int Y { get; set; }
+   
+   public string Id { get; init; } = Guid.NewGuid().ToString();
    public string Name { get; set; }
    
    public List<Component> Components = new();
@@ -25,6 +27,19 @@ public class Entity
    public void RemoveComponent(Component component)
    {
       Components.Remove(component);
+   }
+
+   public bool HasComponent<T>() where T : Component
+   {
+      foreach (Component c in Components)
+      {
+         if (c is T)
+         {
+            return true;
+         }
+      }
+
+      return false;
    }
    
    public T GetComponent<T>() where T : Component

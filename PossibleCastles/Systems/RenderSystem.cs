@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using PossibleCastles.Components;
 using PossibleCastles.UI;
 using SDL2;
@@ -60,6 +61,7 @@ public class RenderSystem
     {
         foreach (RenderComponent c in Components)
         {
+            // TODO: only if they are visible or explored. Maybe do a sort first?
             c.Update(Renderer, TextureFactory(c.Entity.Name));
         }
     }
