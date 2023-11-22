@@ -11,7 +11,7 @@ public class TryMoveEventArgs : EventArgs
 
     public TryMoveEventArgs(LocationComponent component, int dx, int dy)
     {
-        LocationComp = component; 
+        LocationComp = component;
         Dx = dx;
         Dy = dy;
     }

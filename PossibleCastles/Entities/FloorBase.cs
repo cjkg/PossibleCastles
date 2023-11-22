@@ -2,7 +2,7 @@ using PossibleCastles.Components;
 
 namespace PossibleCastles.Entities;
 
-public class FloorBase : Entity 
+public class FloorBase : Entity
 {
     public FloorBase(int x, int y, string name) : base(x, y, name)
     {
@@ -23,5 +23,5 @@ public class FloorBase : Entity
 
         MapTileComponent mapTile = new();
         AddComponent(mapTile);
-    } 
+    }
 }

@@ -14,7 +14,7 @@ public class WallBase : Entity
 
         TextureComponent texture = new("wall", "Tiles");
         AddComponent(texture);
-        
+
         RenderComponent render = new(location, dimension, texture);
         AddComponent(render);
 

@@ -6,6 +6,6 @@ public class WalkableComponent : Component
     {
         Walkable = walkable;
     }
-    
+
     public bool Walkable { get; set; }
 }

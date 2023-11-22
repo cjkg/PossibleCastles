@@ -1,4 +1,5 @@
 using PossibleCastles.Components;
+
 namespace PossibleCastles.Entities;
 
 public class Hero : Entity
@@ -13,7 +14,7 @@ public class Hero : Entity
 
         TextureComponent texture = new("Hero", "Creatures");
         AddComponent(texture);
-        
+
         RenderComponent render = new(location, dimension, texture);
         AddComponent(render);
 
@@ -22,9 +23,8 @@ public class Hero : Entity
 
         MobileComponent mobile = new(input);
         AddComponent(mobile);
-        
+
         CreatureComponent creature = new();
         AddComponent(creature);
-
     }
 }

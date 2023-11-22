@@ -20,18 +20,12 @@ public class GameMap
     public void GenerateRandomTiles()
     {
         List<Entity> tiles = new();
-        Random rand = new Random(); 
-        
-        for (int i = 0; i < (Width * Height); i++)
-        {
+        var rand = new Random();
+
+        for (var i = 0; i < Width * Height; i++)
             if (rand.Next(0, 2) < 0.5)
-            {
-                tiles.Add(new FloorBase(i % Width, i / Width,"floor_base"));
-            }
+                tiles.Add(new FloorBase(i % Width, i / Width, "floor_base"));
             else
-            {
-                tiles.Add(new WallBase(i % Width, i / Width,"wall_stone"));
-            }
-        }
+                tiles.Add(new WallBase(i % Width, i / Width, "wall_stone"));
     }
 }

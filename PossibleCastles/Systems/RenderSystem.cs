@@ -9,7 +9,7 @@ public class RenderSystem
 {
     private Dictionary<string, IntPtr> textures = new();
     protected static List<RenderComponent> Components = new();
-    
+
     public RenderSystem(SdlWindow window, IntPtr renderer)
     {
         Renderer = renderer;
@@ -19,7 +19,7 @@ public class RenderSystem
     {
         Components.Add(component);
     }
-    
+
     public IntPtr Renderer { get; set; }
 
     public IntPtr TextureFactory(string key)
@@ -32,8 +32,8 @@ public class RenderSystem
         }
         else
         {
-            string filePath = "Textures/" + TextureType(key) + "/" + key + ".png";
-            IntPtr image = SDL_image.IMG_Load(filePath);
+            var filePath = "Textures/" + TextureType(key) + "/" + key + ".png";
+            var image = SDL_image.IMG_Load(filePath);
             texture = SDL.SDL_CreateTextureFromSurface(Renderer, image);
             textures.Add(key, texture);
         }
@@ -65,11 +65,9 @@ public class RenderSystem
     public void Update()
     {
         Components.Sort((y, x) => x.Texture.Layer.CompareTo(y.Texture.Layer));
-        foreach (RenderComponent c in Components)
-        {
+        foreach (var c in Components)
             // TODO: only if they are visible or explored. Maybe do a sort first?
             c.Update(Renderer, TextureFactory(c.Entity.Name));
-        }
     }
 
     public void Cleanup()

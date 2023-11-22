@@ -9,10 +9,10 @@ public class MobileComponent : Component
         input.TryMovePub.TryMoveUp += HandleTryMove;
     }
 
-    void HandleTryMove(object sender, TryMoveEventArgs e)
+    private void HandleTryMove(object sender, TryMoveEventArgs e)
     {
         // TODO if not walkable, do nothing
         e.LocationComp.X += e.Dx;
         e.LocationComp.Y += e.Dy;
-    } 
+    }
 }

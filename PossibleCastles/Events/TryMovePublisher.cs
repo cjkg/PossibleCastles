@@ -16,9 +16,6 @@ public class TryMovePublisher
     {
         EventHandler<TryMoveEventArgs> raiseEvent = TryMoveUp;
 
-        if (raiseEvent != null)
-        {
-            raiseEvent(this, e);
-        }
+        if (raiseEvent != null) raiseEvent(this, e);
     }
 }

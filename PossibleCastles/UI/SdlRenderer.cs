@@ -13,7 +13,7 @@ public class SdlRenderer
             SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED |
             SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC); // TODO: Abstract away flags
     }
-    
+
     /*
     public void RenderEntities(List<Entity> entities)
     {
@@ -35,10 +35,10 @@ public class SdlRenderer
 
             SDL.SDL_RenderCopy(Renderer, EntityTexture, ref creatureSrcrect, ref creatureDstrect);
         }
-        // TODO: need to get this out of main into here. 
+        // TODO: need to get this out of main into here.
     }
     */
-    
+
     public IntPtr Renderer { get; set; }
     private static Dictionary<string, IntPtr> textures = new();
 
@@ -66,14 +66,15 @@ public class SdlRenderer
                     break;
             }
 
-            string filePath = "Textures/" + textureType + "/" + key + ".png";
-            IntPtr image = SDL_image.IMG_Load(filePath);
+            var filePath = "Textures/" + textureType + "/" + key + ".png";
+            var image = SDL_image.IMG_Load(filePath);
             texture = SDL.SDL_CreateTextureFromSurface(Renderer, image);
             textures.Add(key, texture);
         }
+
         return texture;
     }
-    
+
     public void Cleanup()
     {
         // Clean up the resources that were created.

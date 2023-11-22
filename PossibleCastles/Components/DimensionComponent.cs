@@ -7,9 +7,11 @@ public class DimensionComponent : Component
         W = w;
         H = h;
     }
-    
-    public int W { get; set; } 
+
+    public int W { get; set; }
     public int H { get; set; }
-    
-    public void Update() {}
+
+    public void Update()
+    {
+    }
 }

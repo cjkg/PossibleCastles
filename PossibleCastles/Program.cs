@@ -3,56 +3,56 @@ using PossibleCastles.Systems;
 using SDL2;
 using PossibleCastles.UI;
 
-namespace PossibleCastles
+namespace PossibleCastles;
+
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        SdlWindow window = new("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,
+            1280, 960,
+            SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN); // TODO: get rid of magic numbers, put in a config file?
+        SdlRenderer renderer = new(window.Win);
+
+        SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
+            480); // TODO: get rid of magic numbers, put in a config file?
+
+        Hero player = new(10, 10, "hero");
+
+        var exit = false;
+
+        InputSystem inputSystem = new();
+        RenderSystem renderSystem = new(window, renderer.Renderer);
+        GameMap map = new(80, 50, 1);
+        map.GenerateRandomTiles();
+        // Main Loop
+        while (true)
         {
-            SdlWindow window = new("Possible Castles", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,
-                1280, 960,
-                SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN); // TODO: get rid of magic numbers, put in a config file?
-            SdlRenderer renderer = new(window.Win);
-             
-            SDL.SDL_RenderSetLogicalSize(renderer.Renderer, 640,
-                480); // TODO: get rid of magic numbers, put in a config file?
+            var start = SDL.SDL_GetPerformanceCounter();
 
-            Hero player = new(10, 10, "hero");
-            
-            bool exit = false;
-            
-            InputSystem inputSystem = new();
-            RenderSystem renderSystem = new(window, renderer.Renderer);
-            GameMap map = new(80, 50, 1);
-            map.GenerateRandomTiles();
-            // Main Loop
-            while (true)
-            {
-                ulong start = SDL.SDL_GetPerformanceCounter();
-                
-                inputSystem.Update();
-                
-                // Sets the color that the screen will be cleared with.
-                SDL.SDL_SetRenderDrawColor(renderer.Renderer, 0, 0, 0, 255);
+            inputSystem.Update();
 
-                // Clears the current render surface.
-                SDL.SDL_RenderClear(renderer.Renderer);
+            // Sets the color that the screen will be cleared with.
+            SDL.SDL_SetRenderDrawColor(renderer.Renderer, 0, 0, 0, 255);
 
-                // This is where drawing happens
-                renderSystem.Update();
+            // Clears the current render surface.
+            SDL.SDL_RenderClear(renderer.Renderer);
 
-                ulong end = SDL.SDL_GetPerformanceCounter();
+            // This is where drawing happens
+            renderSystem.Update();
 
-                float elapsedMS = (end - start) / SDL.SDL_GetPerformanceFrequency() * 1000.0f;
-                
-                // Switches out the currently presented render surface with the one we just did work on.
-                SDL.SDL_RenderPresent(renderer.Renderer);
+            var end = SDL.SDL_GetPerformanceCounter();
 
-                var frameTime = SDL.SDL_GetTicks();
-                SDL.SDL_Delay((uint) Math.Floor(16.666f - elapsedMS));
-            }
-            renderSystem.Cleanup();
-            window.Cleanup();
+            var elapsedMS = (end - start) / SDL.SDL_GetPerformanceFrequency() * 1000.0f;
+
+            // Switches out the currently presented render surface with the one we just did work on.
+            SDL.SDL_RenderPresent(renderer.Renderer);
+
+            var frameTime = SDL.SDL_GetTicks();
+            SDL.SDL_Delay((uint)Math.Floor(16.666f - elapsedMS));
         }
+
+        renderSystem.Cleanup();
+        window.Cleanup();
     }
 }
