@@ -5,15 +5,17 @@ namespace PossibleCastles.Components;
 
 public class RenderComponent: Component
 {
-    public RenderComponent(LocationComponent locationComponent, DimensionComponent dimensionComponent)
+    public RenderComponent(LocationComponent locationComponent, DimensionComponent dimensionComponent, TextureComponent textureComponent)
     {
         Location = locationComponent;
         Dimension = dimensionComponent;
+        Texture = textureComponent;
         RenderSystem.Register(this);
     }
     
     public LocationComponent Location { get; set; }
     public DimensionComponent Dimension { get; set; }
+    public TextureComponent Texture { get; set; }
     
     public void Update(IntPtr renderer, IntPtr texture)
     {

@@ -12,7 +12,10 @@ public class FloorBase : Entity
         DimensionComponent dimension = new(1, 1);
         AddComponent(dimension);
 
-        RenderComponent render = new(location, dimension);
+        TextureComponent texture = new(name, "Tiles");
+        AddComponent(texture);
+
+        RenderComponent render = new(location, dimension, texture);
         AddComponent(render);
 
         WalkableComponent walkable = new(true);

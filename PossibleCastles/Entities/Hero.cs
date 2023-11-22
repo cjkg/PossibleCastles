@@ -10,8 +10,11 @@ public class Hero : Entity
 
         DimensionComponent dimension = new(1, 1);
         AddComponent(dimension);
+
+        TextureComponent texture = new("Hero", "Creatures");
+        AddComponent(texture);
         
-        RenderComponent render = new(location, dimension);
+        RenderComponent render = new(location, dimension, texture);
         AddComponent(render);
 
         InputComponent input = new(location);

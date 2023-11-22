@@ -28,8 +28,10 @@ namespace PossibleCastles
             // Main Loop
             while (true)
             {
+                ulong start = SDL.SDL_GetPerformanceCounter();
+                
                 inputSystem.Update();
-                 
+                
                 // Sets the color that the screen will be cleared with.
                 SDL.SDL_SetRenderDrawColor(renderer.Renderer, 0, 0, 0, 255);
 
@@ -38,9 +40,16 @@ namespace PossibleCastles
 
                 // This is where drawing happens
                 renderSystem.Update();
-                 
+
+                ulong end = SDL.SDL_GetPerformanceCounter();
+
+                float elapsedMS = (end - start) / SDL.SDL_GetPerformanceFrequency() * 1000.0f;
+                
                 // Switches out the currently presented render surface with the one we just did work on.
                 SDL.SDL_RenderPresent(renderer.Renderer);
+
+                var frameTime = SDL.SDL_GetTicks();
+                SDL.SDL_Delay((uint) Math.Floor(16.666f - elapsedMS));
             }
             renderSystem.Cleanup();
             window.Cleanup();

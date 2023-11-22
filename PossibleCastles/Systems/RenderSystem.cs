@@ -1,5 +1,5 @@
-using System.Collections.Specialized;
 using PossibleCastles.Components;
+using PossibleCastles.Entities;
 using PossibleCastles.UI;
 using SDL2;
 
@@ -8,7 +8,7 @@ namespace PossibleCastles.Systems;
 public class RenderSystem
 {
     private Dictionary<string, IntPtr> textures = new();
-    protected static List<Component> Components = new();
+    protected static List<RenderComponent> Components = new();
     
     public RenderSystem(SdlWindow window, IntPtr renderer)
     {
@@ -32,23 +32,7 @@ public class RenderSystem
         }
         else
         {
-            string textureType;
-            switch (key)
-            {
-                case "hero":
-                case "spider":
-                    textureType = "Creatures";
-                    break;
-                case "floor_base":
-                case "wall_stone":
-                    textureType = "Tiles";
-                    break;
-                default:
-                    textureType = "Creatures";
-                    break;
-            }
-
-            string filePath = "Textures/" + textureType + "/" + key + ".png";
+            string filePath = "Textures/" + TextureType(key) + "/" + key + ".png";
             IntPtr image = SDL_image.IMG_Load(filePath);
             texture = SDL.SDL_CreateTextureFromSurface(Renderer, image);
             textures.Add(key, texture);
@@ -57,8 +41,30 @@ public class RenderSystem
         return texture;
     }
 
+    public string TextureType(string key)
+    {
+        string textureType;
+        switch (key)
+        {
+            case "hero":
+            case "spider":
+                textureType = "Creatures";
+                break;
+            case "floor_base":
+            case "wall_stone":
+                textureType = "Tiles";
+                break;
+            default:
+                textureType = "Creatures";
+                break;
+        }
+
+        return textureType;
+    }
+
     public void Update()
     {
+        Components.Sort((y, x) => x.Texture.Layer.CompareTo(y.Texture.Layer));
         foreach (RenderComponent c in Components)
         {
             // TODO: only if they are visible or explored. Maybe do a sort first?
