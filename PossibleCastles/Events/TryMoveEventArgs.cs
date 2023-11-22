@@ -1,5 +1,4 @@
 using PossibleCastles.Components;
-using PossibleCastles.Entities;
 
 namespace PossibleCastles.Events;
 

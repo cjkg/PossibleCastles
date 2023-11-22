@@ -23,8 +23,5 @@ public class Hero : Entity
 
         MobileComponent mobile = new(input);
         AddComponent(mobile);
-
-        CreatureComponent creature = new();
-        AddComponent(creature);
     }
 }
