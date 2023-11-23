@@ -47,7 +47,8 @@ internal class Program
 
             // Switches out the currently presented render surface with the one we just did work on.
             SDL.SDL_RenderPresent(renderer.Renderer);
-
+            
+            // Maxes at 60 FPS, probably overkill
             var frameTime = SDL.SDL_GetTicks();
             SDL.SDL_Delay((uint)Math.Floor(16.666f - elapsedMS));
         }
