@@ -24,7 +24,7 @@ internal class Program
         InputSystem inputSystem = new();
         RenderSystem renderSystem = new(window, renderer.Renderer);
         GameMap map = new(80, 50, 1);
-        map.GenerateRandomTiles();
+        map.GenerateBinaryTreeTiles();
         // Main Loop
         while (true)
         {

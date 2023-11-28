@@ -17,6 +17,13 @@ public class GameMap
     public int Level { get; set; }
     public List<Entity> Tiles { get; set; }
 
+    public void GenerateBinaryTreeTiles()
+    {
+        List<Entity> tiles = new();
+        Grid grid = new(Width, Height);
+        grid = BinaryTree.On(grid);
+    }
+
     public void GenerateRandomTiles()
     {
         List<Entity> tiles = new();
